@@ -81,6 +81,12 @@ var startGame=function() {
             //debugger;
             //pass the pickedEnemyName variable's value into the fight function
             fight(pickedEnemyName);
+            if (playerHealth > 0 && i < enemyNames.length - 1) {
+                var storeConfirm=window.confirm("The fight is over, visit the store before the next round?");
+                if(storeConfirm) {
+                    shop();
+                }
+            }
         }
         else {
             window.alert("You have lost your robot in battle! Game Over!")
@@ -109,10 +115,48 @@ var endGame=function() {
     }
 }
 
-
-
 //function for shop
-
+var shop=function() {
+    //ask player what they'd like to do
+    var shopOptionPrompt=window.prompt(
+        "Would you like ot REFILL your health, UPGRADE your attack, or LEAVE the store? Please enter one: 'REFILL', 'UPGRADE', or 'LEAVE' to make a choice."
+    );
+    //using switch to carry out function
+    switch(shopOptionPrompt) {
+        case "REFILL": //new case
+        case "refill":
+            if(playerMoney>=7) {
+                window.alert("Refilling player's health by 20 for 7 dollars.");
+                //increase health and decrease money
+                playerHealth+=20;
+                playerMoney-=7;
+            }
+            else {
+                window.alert("You don't have enough money!");
+            }
+            break;
+        case "UPGRADE": //new case
+        case "upgrade":
+            if(playerMoney>=7) {
+                window.alert("Upgradin player's attack by 6 for 7 dollars.");
+                playerAttack+=6;
+                playerMoney-=7;
+            }
+            else {
+                window.alert("You don't have enough money!");
+            }
+            break;
+        case "LEAVE"://new case
+        case "leave":
+            window.alert("leaving the store.");
+            //do nothing function will end
+            break;
+        default:
+            window.alert("You did not pick a valid option. Try again");
+            shop();
+            break;
+    }
+}
 
 
 
