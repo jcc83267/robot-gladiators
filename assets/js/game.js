@@ -107,7 +107,8 @@ var fight=function(enemy) {
             break;
         }
         //Subtract the value of `playerInfo.attack` from the value of `enemy.health` and use that result to update the value in the `enemy.health` variable
-        var damage=randomNumber(enemy.attack - 3, enemy.attack);
+        console.log(playerInfo.attack)
+        var damage=randomNumber(playerInfo.attack - 3, playerInfo.attack);
         enemy.health=Math.max(0, enemy.health-damage);
         // Log a resulting message to the console so we know that it worked.            
         console.log(playerInfo.name + " attacked " + enemy.name + ". " + enemy.name + " now has " + enemy.health + " health remaining.");
@@ -123,7 +124,7 @@ var fight=function(enemy) {
             window.alert(enemy.name + " still has " + enemy.health + " health left.");
         }
         // Subtract the value of `enemyAttack` from the value of `playerInfo.health` and use that result to update the value in the `playerInfo.health` variable.
-        damage=randomNumber(playerInfo.attack-3,playerInfo.attack);
+        damage=randomNumber(enemyInfo.attack-3,enemyInfo.attack);
         playerInfo.health=Math.max(0, playerInfo.health-damage);
         // Log a resulting message to the console so we know that it worked.
         console.log(enemy.name + " attacked " + playerInfo.name + ". " + playerInfo.name + " now has " + playerInfo.health + " health remaining.");
@@ -191,27 +192,26 @@ var endGame=function() {
 var shop=function() {
     //ask player what they'd like to do
     var shopOptionPrompt=window.prompt(
-        "Would you like ot REFILL your health, UPGRADE your attack, or LEAVE the store? Please enter one: 'REFILL', 'UPGRADE', or 'LEAVE' to make a choice."
+        "Would you like ot REFILL your health, UPGRADE your attack, or LEAVE the store? Please enter one: 1 for REFILL, 2 for UPGRADE, or 3 for LEAVE to make a choice."
     );
+    shopOptionPrompt=parseInt(shopOptionPrompt);
     //using switch to carry out function
     switch(shopOptionPrompt) {
-        case "REFILL": //new case
-        case "refill":
+        case 1:
             playerInfo.refillHealth();
             break;
-        case "UPGRADE": //new case
-        case "upgrade":
+        case 2:
             playerInfo.upgradeAttack();
             break;
-        case "LEAVE"://new case
-        case "leave":
+        case 3:
             window.alert("leaving the store.");
             //do nothing function will end
             break;
-        case "godmode":
-            playerInfo.attack=99;
-            playerInfo.health=999;
-            playermoney=999;
+        case 8:
+            playerInfo.attack=888;
+            playerInfo.health=888;
+            playerInfo.money=888;
+            console.log(playerInfo.name, playerInfo.health, playerInfo.attack, playerInfo.money);
             break;
         default:
             window.alert("You did not pick a valid option. Try again");
